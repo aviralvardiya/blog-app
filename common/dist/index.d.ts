@@ -35,10 +35,13 @@ export declare const createBlogInput: z.ZodObject<{
 export declare const updateBlogInput: z.ZodObject<{
     title: z.ZodOptional<z.ZodString>;
     content: z.ZodOptional<z.ZodString>;
+    postId: z.ZodString;
 }, "strip", z.ZodTypeAny, {
+    postId: string;
     title?: string | undefined;
     content?: string | undefined;
 }, {
+    postId: string;
     title?: string | undefined;
     content?: string | undefined;
 }>;

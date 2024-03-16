@@ -21,4 +21,5 @@ exports.createBlogInput = zod_1.default.object({
 exports.updateBlogInput = zod_1.default.object({
     title: zod_1.default.string().optional(),
     content: zod_1.default.string().optional(),
+    postId: zod_1.default.string()
 });
