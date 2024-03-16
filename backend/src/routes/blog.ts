@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { createBlogInput, updateBlogInput } from "@rglair/common-blogapp";
 import { Hono } from "hono";
 import { sign, verify } from "hono/jwt";
 
@@ -40,6 +41,13 @@ blogRoute.use("/*", async (c, next) => {
 });
 
 blogRoute.post("/", async (c) => {
+  const result = createBlogInput.safeParse(await c.req.json());
+  if (!result.success) {
+    console.log(result.error);
+    c.status(400);
+    return c.json({ msg: "invalid inputs" });
+  }
+
   const { title, content } = await c.req.json();
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
@@ -62,6 +70,12 @@ blogRoute.post("/", async (c) => {
 });
 
 blogRoute.put("/", async (c) => {
+  const result = updateBlogInput.safeParse(await c.req.json());
+  if (!result.success) {
+    console.log(result.error);
+    c.status(400);
+    return c.json({ msg: "invalid inputs" });
+  }
   const userId = c.get("userId");
   const { postId, title, content } = await c.req.json();
 

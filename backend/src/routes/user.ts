@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { signinInput, signupInput } from "@rglair/common-blogapp";
 import { Hono } from "hono";
 import { sign } from "hono/jwt";
 
@@ -14,6 +15,14 @@ userRoute.post("/signup", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
+
+  const result = signupInput.safeParse(await c.req.json());
+  if (!result.success) {
+    console.log(result.error);
+    c.status(400);
+    return c.json({ msg: "invalid inputs" });
+  }
+
   const { email, password, name } = await c.req.json();
   try {
     const newUser = await prisma.user.create({
@@ -25,12 +34,19 @@ userRoute.post("/signup", async (c) => {
     );
     return c.json({ msg: "user created", token: token });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return c.status(403);
   }
 });
 
 userRoute.post("/signin", async (c) => {
+  const result = signinInput.safeParse(await c.req.json());
+  if (!result.success) {
+    console.log(result.error);
+    c.status(400);
+    return c.json({ msg: "invalid inputs" });
+  }
+
   const { email, password } = await c.req.json();
 
   const prisma = new PrismaClient({
