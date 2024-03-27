@@ -4,6 +4,7 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 import { decode, sign, verify } from "hono/jwt";
 import { userRoute } from "./routes/user";
 import { blogRoute } from "./routes/blog";
+import { cors } from "hono/cors";
 
 const app = new Hono<{
   Bindings: {
@@ -14,6 +15,8 @@ const app = new Hono<{
     userId: string;
   };
 }>();
+
+app.use("/*",cors())
 
 app.get("/",(c)=>{
   return c.text("welcome to blog app backend, this backed is deployed on cloudflare workers and it is a serverless deployment")
