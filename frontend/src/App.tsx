@@ -6,6 +6,8 @@ import {
 import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import Blog from './pages/Blog';
+import Publish from './pages/Publish';
+import { Blogs } from './pages/Blogs';
 
 function App() {
 
@@ -23,8 +25,16 @@ function App() {
       element: <Signin/>,
     },
     {
-      path: "/blog",
+      path: "/blogs",
+      element: <Blogs/>,
+    },
+    {
+      path: "/blog/:id",
       element: <Blog/>,
+    },
+    {
+      path: "/publish",
+      element: <Publish/>,
     },
   ]);
 
