@@ -1,16 +1,12 @@
-import './App.css'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Signup from './pages/Signup';
-import Signin from './pages/Signin';
-import Blog from './pages/Blog';
-import Publish from './pages/Publish';
-import { Blogs } from './pages/Blogs';
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Signup from "./pages/Signup";
+import Signin from "./pages/Signin";
+import Blog from "./pages/Blog";
+import { Publish } from "./pages/Publish";
+import { Blogs } from "./pages/Blogs";
 
 function App() {
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -18,23 +14,23 @@ function App() {
     },
     {
       path: "/signup",
-      element: <Signup/>,
+      element: <Signup />,
     },
     {
       path: "/signin",
-      element: <Signin/>,
+      element: <Signin />,
     },
     {
       path: "/blogs",
-      element: <Blogs/>,
+      element: <Blogs />,
     },
     {
       path: "/blog/:id",
-      element: <Blog/>,
+      element: <Blog />,
     },
     {
       path: "/publish",
-      element: <Publish/>,
+      element: <Publish />,
     },
   ]);
 
@@ -42,7 +38,7 @@ function App() {
     <>
       <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
