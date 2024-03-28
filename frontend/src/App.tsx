@@ -5,12 +5,18 @@ import Signin from "./pages/Signin";
 import Blog from "./pages/Blog";
 import { Publish } from "./pages/Publish";
 import { Blogs } from "./pages/Blogs";
+import { RecoilRoot } from "recoil";
+import Protected from "./components/ProtectedComponent";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <div>Hello world!</div>,
+      element: (
+        <Protected>
+          <Blogs />
+        </Protected>
+      ),
     },
     {
       path: "/signup",
@@ -22,21 +28,35 @@ function App() {
     },
     {
       path: "/blogs",
-      element: <Blogs />,
+      element: (
+        <Protected>
+          <Blogs />
+        </Protected>
+      ),
     },
     {
       path: "/blog/:id",
-      element: <Blog />,
+      element: (
+        <Protected>
+          <Blog />
+        </Protected>
+      ),
     },
     {
       path: "/publish",
-      element: <Publish />,
+      element: (
+        <Protected>
+          <Publish />
+        </Protected>
+      ),
     },
   ]);
 
   return (
     <>
-      <RouterProvider router={router} />
+      <RecoilRoot>
+        <RouterProvider router={router} />
+      </RecoilRoot>
     </>
   );
 }

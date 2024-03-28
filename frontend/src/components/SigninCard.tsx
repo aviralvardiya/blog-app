@@ -1,7 +1,7 @@
 import { signinType } from "@rglair/common-blogapp";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Auth() {
   const [inputs, setInputs] = useState<signinType>({
@@ -9,6 +9,7 @@ function Auth() {
     password: "",
   });
   const [showError, setShowError] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = async () => {
     let config = {
@@ -24,6 +25,7 @@ function Auth() {
       const response = await axios(config);
       console.log(response.data.token);
       localStorage.setItem("token",response.data.token)
+      navigate("/")
     } catch (error:any) {
       console.log("an error accoured")
       if(error.response.data.msg){

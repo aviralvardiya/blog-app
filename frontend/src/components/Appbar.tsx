@@ -1,7 +1,10 @@
+import { useRecoilValue } from "recoil";
 import { Avatar } from "./BlogCard";
 import { Link } from "react-router-dom";
+import { userInfoAtom } from "../state/user.atom";
 
 export const Appbar = () => {
+    const userInfo = useRecoilValue(userInfoAtom)
   return (
     <div className="border-b flex justify-between px-10 py-4">
       <Link
@@ -20,7 +23,7 @@ export const Appbar = () => {
           </button>
         </Link>
 
-        <Avatar size={"big"} name="harkirat" />
+        <Avatar size={"big"} name={userInfo.name} />
       </div>
     </div>
   );
