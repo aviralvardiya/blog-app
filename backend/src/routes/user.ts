@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { signinInput, signupInput } from "@rglair/common-blogapp";
 import { Hono } from "hono";
-import { sign } from "hono/jwt";
+import { jwt, sign, verify } from "hono/jwt";
 
 export const userRoute = new Hono<{
   Bindings: {
@@ -72,3 +72,32 @@ userRoute.post("/signin", async (c) => {
     return c.json("internal error");
   }
 });
+
+userRoute.get("/info",async (c)=>{
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const authHeader = c.req.header("authorization")||"bearer kl";
+  // console.log(authHeader)
+  const token = authHeader.split(' ')[1]
+  try {
+    const decoded = await verify(token,c.env.JWT_SECRET)
+    const userInfo = await prisma.user.findFirst({
+      where:{
+        id:decoded.id
+      },
+      select:{
+        id:true,
+        email:true,
+        name:true,
+      }
+    })
+    return c.json(userInfo)
+    
+  } catch (error:any) {
+    console.log(error.message)
+    return c.text("some error occoured")
+  }
+
+})
