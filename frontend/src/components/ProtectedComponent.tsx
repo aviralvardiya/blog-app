@@ -42,7 +42,7 @@ function Protected({ children }: { children: ReactNode }) {
     }
   }, [setUserInfo]);
 
-  return <>{userInfo ? <div>{children}</div> : <p>Loading...</p>}</>;
+  return <>{userInfo.id ? <div>{children}</div> : <p>Loading...</p>}</>;
 }
 
 export default Protected;

@@ -1,9 +1,10 @@
 import { signupType } from "@rglair/common-blogapp";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Auth() {
+  const navigate = useNavigate()
   const [inputs, setInputs] = useState<signupType>({
     email: "",
     name: "",
@@ -23,8 +24,9 @@ function Auth() {
     };
     try {
       const response = await axios(config);
-      console.log(response.data.token);
+      // console.log(response.data.token);
       localStorage.setItem("token",response.data.token)
+      navigate("/")
     } catch (error:any) {
       console.log("an error accoured")
       if(error.response.data.msg){

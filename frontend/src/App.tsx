@@ -7,6 +7,7 @@ import { Publish } from "./pages/Publish";
 import { Blogs } from "./pages/Blogs";
 import { RecoilRoot } from "recoil";
 import Protected from "./components/ProtectedComponent";
+import { Profile } from "./pages/Profile";
 
 function App() {
   const router = createBrowserRouter([
@@ -47,6 +48,14 @@ function App() {
       element: (
         <Protected>
           <Publish />
+        </Protected>
+      ),
+    },
+    {
+      path: "/profile",
+      element: (
+        <Protected>
+          <Profile />
         </Protected>
       ),
     },
