@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { Appbar } from "../components/Appbar";
 import { userInfoAtom } from "../state/user.atom";
 import { useNavigate } from "react-router-dom";
