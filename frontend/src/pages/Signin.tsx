@@ -4,10 +4,10 @@ import SigninCard from "../components/SigninCard"
 function Signin() {
   return <div>
     <div className="flex">
-      <div className="w-1/2">
+      <div className="w-full lg:w-1/2">
         <SigninCard />
       </div>
-      <div className="w-1/2 invisible lg:visible">
+      <div className="w-0 lg:w-1/2 invisible lg:visible">
         <QuoteComponent />
       </div>
     </div>
