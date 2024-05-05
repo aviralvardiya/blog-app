@@ -3,11 +3,11 @@ function QuoteComponent() {
     <div className="bg-slate-200 h-screen flex flex-col justify-center items-center w-full">
       <div className="w-3/4">
         <h1 className="text-3xl font-bold ">
-          “I'm sick of following my dreams, man. I'm just going to ask where
-          they're going and hook up with ’em later."
+          “Look at the sky. We are not alone. The whole universe is friendly to
+          us and conspires only to give the best to those who dream and work."
         </h1>
-        <p className="ml-5 mt-3 font-semibold text-lg">Mitch Hedberg</p>
-        <p className="ml-5 text-gray-600 text-sm">American comedian</p>
+        <p className="ml-5 mt-3 font-semibold text-lg">A. P. J. Abdul Kalam</p>
+        <p className="ml-5 text-gray-600 text-sm">Former President of India</p>
       </div>
     </div>
   );
